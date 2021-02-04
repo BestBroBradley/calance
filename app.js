@@ -15,18 +15,12 @@ const writeData = (data) => {
 
 // This function formats the data received into something nice to look at
 const formatData = (data) => {
-        let commitArray = []
-        let i
-        for (i = 0; i < data.values.length; i++) {
-            console.log(data.values[i].message)
-            console.log(data.values[i].date)
-            commitArray.push(data.values[i].message, data.values[i].date)
-        }
-        writeData(commitArray)
-
-    //console.log(data.values[0].message)
-    //console.log(data.values[1].message)
-    // writeData(data)
+    let commitArray = []
+    let i
+    for (i = 0; i < data.values.length; i++) {
+        commitArray.push(` Commit: ${data.values[i].message} (${data.values[i].date})`)
+    }
+    writeData(commitArray)
 }
 
 // This function routes to the API folder to get the BitBucket API data
@@ -39,6 +33,5 @@ const getData = () => {
             console.log(err)
         })
 }
-
 
 getData()
