@@ -2,21 +2,8 @@
 const fs = require('fs')
 const API = require('./API/api.js')
 
-
-// This function routes to the API folder to get the BitBucket API data
-const getData = () => {
-    API.getCommits()
-        .then(res => {
-            console.log(res)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-}
-
-
 // This function writes data to the commits.txt file
-const writeCommits = (data) => {
+const writeData = (data) => {
     fs.writeFile('./data/commits.txt', data, (err) => {
         if (err) {
             console.log(err)
@@ -25,5 +12,33 @@ const writeCommits = (data) => {
         }
     })
 }
+
+// This function formats the data received into something nice to look at
+const formatData = (data) => {
+        let commitArray = []
+        let i
+        for (i = 0; i < data.values.length; i++) {
+            console.log(data.values[i].message)
+            console.log(data.values[i].date)
+            commitArray.push(data.values[i].message, data.values[i].date)
+        }
+        writeData(commitArray)
+
+    //console.log(data.values[0].message)
+    //console.log(data.values[1].message)
+    // writeData(data)
+}
+
+// This function routes to the API folder to get the BitBucket API data
+const getData = () => {
+    API.getCommits()
+        .then(res => {
+            formatData(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 
 getData()

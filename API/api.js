@@ -4,7 +4,6 @@ const axios = require('axios')
 
 module.exports = {
     getCommits: function () {
-        console.log("Woo")
-        return axios.get('https://stash.atlassian.com/rest/api/1.0/projects/JIRA/repos/jira/commits')
+        return axios.get('https://api.bitbucket.org/2.0/repositories/calanceus/interviews17/commits')
     }
 }
